@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Environment
+.env
+.env.local
+backend/.env
+frontend/.env.local
+
+# Data
+backend/researchsphere.db
+backend/chroma_db/
+backend/uploads/
+*.db
+
+# Build
+frontend/.next/
+frontend/.next-local/
+frontend/out/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Models cache (downloaded at runtime)
+.cache/
+models/

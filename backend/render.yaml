@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: researchsphere-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: GROQ_API_KEY
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        value: sqlite:///./researchsphere.db
+      - key: CHROMA_PERSIST_DIR
+        value: /var/data/chroma_db
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+      - key: EMBEDDING_MODEL
+        value: BAAI/bge-small-en-v1.5
+      - key: LLM_MODEL
+        value: llama-3.3-70b-versatile
+      - key: VISION_MODEL
+        value: llava-v1.5-7b-4096-preview
+      - key: WHISPER_MODEL
+        value: base
+      - key: CORS_ORIGINS
+        sync: false
+      - key: ENVIRONMENT
+        value: production
+    disk:
+      name: researchsphere-data
+      mountPath: /var/data
+      sizeGB: 1

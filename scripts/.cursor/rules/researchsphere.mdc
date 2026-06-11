@@ -1,0 +1,30 @@
+---
+description: ResearchSphere AI project conventions and stack
+alwaysApply: true
+---
+
+# ResearchSphere AI
+
+Multimodal research assistant — Phase 1 MVP (100% free tier).
+
+## Stack
+
+- **Frontend**: Next.js 15 App Router, TypeScript, Tailwind, shadcn/ui, Zustand, Axios, React Flow
+- **Backend**: FastAPI, SQLAlchemy (SQLite), ChromaDB, sentence-transformers
+- **LLM**: Groq — `llama3-70b-8192` (text), `llava-v1.5-7b-4096-preview` (vision, OCR fallback)
+- **Embeddings**: `BAAI/bge-small-en-v1.5` | **Re-ranker**: `cross-encoder/ms-marco-MiniLM-L-6-v2`
+- **Chunking**: 512 tokens, 50 overlap | **Hybrid search**: 0.6 vector + 0.4 BM25
+
+## Conventions
+
+- Auth: httpOnly cookie + Bearer header fallback; `withCredentials: true` on frontend
+- All data scoped to `workspace_id` + `user_id`
+- Pydantic v2 schemas; full TypeScript types (no `any`)
+- Generate files completely — no truncation or placeholder comments
+- Build order: backend deps → models → utils → API → services → frontend types → stores → components → pages
+
+## API base
+
+- Local backend: `http://localhost:8000`
+- Frontend env: `NEXT_PUBLIC_API_URL`
+- CORS: `CORS_ORIGINS` must include frontend URL
